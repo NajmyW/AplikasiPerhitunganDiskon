@@ -77,7 +77,7 @@ public class HitungDiskon extends javax.swing.JFrame {
         jLabel6.setText("Masukan Nama Barang :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(97, 47, 19, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 47, 19, 0);
         jPanel3.add(jLabel6, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,7 +104,7 @@ public class HitungDiskon extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(105, 56, 19, 31);
+        gridBagConstraints.insets = new java.awt.Insets(20, 56, 19, 31);
         jPanel3.add(namaBarang, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -307,7 +307,7 @@ public class HitungDiskon extends javax.swing.JFrame {
         jPanel3.add(jLabel13, gridBagConstraints);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 206));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
