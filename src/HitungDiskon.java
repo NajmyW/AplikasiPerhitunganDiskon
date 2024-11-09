@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import jdk.jfr.Description;
 
 /*
@@ -15,12 +16,18 @@ import jdk.jfr.Description;
  * @author Acer
  */
 public class HitungDiskon extends javax.swing.JFrame {
+    // Deklarasikan DefaultTableModel sebagai atribut kelas
+    private final DefaultTableModel dtm;
 
     /**
      * Creates new form HitungDiskon
      */
     public HitungDiskon() {
         initComponents();
+                // Inisialisasi model tabel di sini
+        String[] judul = {"Nama Barang", "Harga", "Diskon", "Hemat", "Total Pembayaran"};
+        dtm = new DefaultTableModel(null, judul);
+        jTable1.setModel(dtm);
     }
 
     /**
@@ -33,12 +40,10 @@ public class HitungDiskon extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        hargaAsli = new javax.swing.JTextField();
+        namaBarang = new javax.swing.JTextField();
         kodeDiskon = new javax.swing.JTextField();
         totalHarga = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -55,12 +60,13 @@ public class HitungDiskon extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         resDiskon1 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        hargaAsli = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 206));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Perhitungan Diskon", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -68,7 +74,7 @@ public class HitungDiskon extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Masukan Harga :");
+        jLabel6.setText("Masukan Nama Barang :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(97, 47, 19, 0);
@@ -84,27 +90,14 @@ public class HitungDiskon extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(9, 47, 14, 0);
         jPanel3.add(jLabel9, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Total Harga :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(4, 47, 2, 0);
-        jPanel3.add(jLabel10, gridBagConstraints);
-
-        hargaAsli.addActionListener(new java.awt.event.ActionListener() {
+        namaBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hargaAsliActionPerformed(evt);
+                namaBarangActionPerformed(evt);
             }
         });
-        hargaAsli.addKeyListener(new java.awt.event.KeyAdapter() {
+        namaBarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                hargaAsliKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                hargaAsliKeyTyped(evt);
+                namaBarangKeyReleased(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -112,7 +105,7 @@ public class HitungDiskon extends javax.swing.JFrame {
         gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(105, 56, 19, 31);
-        jPanel3.add(hargaAsli, gridBagConstraints);
+        jPanel3.add(namaBarang, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -279,7 +272,7 @@ public class HitungDiskon extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Total Harga :");
+        jLabel12.setText("Total Pembayaran :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -313,6 +306,65 @@ public class HitungDiskon extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(9, 47, 14, 0);
         jPanel3.add(jLabel13, gridBagConstraints);
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 206));
+        jPanel1.setLayout(new java.awt.GridLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 100;
+        jPanel3.add(jPanel1, gridBagConstraints);
+
+        hargaAsli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hargaAsliActionPerformed(evt);
+            }
+        });
+        hargaAsli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                hargaAsliKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hargaAsliKeyTyped(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(11, 56, 19, 31);
+        jPanel3.add(hargaAsli, gridBagConstraints);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Masukan Harga :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(3, 47, 19, 0);
+        jPanel3.add(jLabel14, gridBagConstraints);
+
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -337,7 +389,7 @@ public class HitungDiskon extends javax.swing.JFrame {
 
     // Set nilai yang dipilih di ComboBox sesuai dengan nilai slider
     ComboDiskon.setSelectedItem(String.valueOf(selectDiskon));
-     if (!hargaAsli.getText().isEmpty()) {
+     if (!hargaAsli.getText().isEmpty() && !hargaAsli.getText().isEmpty()) {
             BtnHitung.setEnabled(true);
             BtnHapus.setEnabled(true);
      prosesHitung();
@@ -355,7 +407,15 @@ public class HitungDiskon extends javax.swing.JFrame {
 }
     private void BtnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHitungActionPerformed
         // TODO add your handling code here:
-     prosesHitung();
+        prosesHitung2();
+        namaBarang.setText("");        
+        hargaAsli.setText("");
+        SlideDiskon.setValue(0);
+        resDiskon1.setText("");
+        kodeDiskon.setText("");
+        diskonT.setText("");
+        totalHarga.setText("");
+        namaBarang.requestFocus();
     }//GEN-LAST:event_BtnHitungActionPerformed
 
     private void prosesHitung(){
@@ -387,9 +447,57 @@ public class HitungDiskon extends javax.swing.JFrame {
             double totalDiscount = discountPercentage + additionalDiscount;
             double savings = originalPrice * (totalDiscount / 100);
             double finalPrice = originalPrice - savings;
-
+            
             // Display the results
             diskonT.setText(String.format("%.2s", totalDiscount)+"%");
+            totalHarga.setText(String.format("%.2f", finalPrice));
+            resDiskon1.setText(String.format("%.2f", savings));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Masukkan harga asli yang valid!", "Error", JOptionPane.ERROR_MESSAGE);
+        }   
+    }
+      private void prosesHitung2(){
+       try {
+            // Parse original price
+            double originalPrice = Double.parseDouble(hargaAsli.getText());
+
+            // Get discount percentage from JComboBox and parse it
+            String discountText = (String) ComboDiskon.getSelectedItem();
+            double discountPercentage = Integer.parseInt(discountText.replace("%", ""));
+
+            // Check for additional discount from coupon code
+            String couponCode = kodeDiskon.getText().trim();
+            double additionalDiscount = 0.0;
+
+            // Apply 20% additional discount if the coupon code is valid
+            if (couponCode.equals("UNISKA2024") || 
+                couponCode.equals("UNISKABISA") || 
+                couponCode.equals("UNISKAMAJU")) {
+                
+                additionalDiscount = 20.0;
+                JOptionPane.showMessageDialog(this, "Kode kupon valid! Diskon tambahan 20%");
+            } else if (!couponCode.isEmpty()) {
+                kodeDiskon.setText("");
+                JOptionPane.showMessageDialog(this, "Kode kupon tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            // Calculate total discount
+            double totalDiscount = discountPercentage + additionalDiscount;
+            double savings = originalPrice * (totalDiscount / 100);
+            double finalPrice = originalPrice - savings;
+            
+            // Menambahkan data baru ke tabel tanpa menghapus data lama
+            String[] data = {
+                namaBarang.getText(),
+                hargaAsli.getText(),
+                String.format("%.2s", totalDiscount) + "%",
+                String.format("%.2f", savings),
+                String.format("%.2f", finalPrice)
+            };
+            dtm.addRow(data);  // Menambahkan baris baru ke model tabel
+            
+            // Display the results
+            diskonT.setText(String.format("%.2s", totalDiscount) + "%");
             totalHarga.setText(String.format("%.2f", finalPrice));
             resDiskon1.setText(String.format("%.2f", savings));
         } catch (NumberFormatException ex) {
@@ -402,14 +510,9 @@ public class HitungDiskon extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void hargaAsliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaAsliActionPerformed
+    private void namaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaBarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hargaAsliActionPerformed
-
-    private void hargaAsliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaAsliKeyTyped
-        // TODO add your handling code here:
-        filterKeyTyped(evt);
-    }//GEN-LAST:event_hargaAsliKeyTyped
+    }//GEN-LAST:event_namaBarangActionPerformed
 
     private void diskonTKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diskonTKeyTyped
         // TODO add your handling code here:
@@ -420,22 +523,17 @@ public class HitungDiskon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_resDiskon1KeyTyped
 
-    private void hargaAsliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaAsliKeyReleased
+    private void namaBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_namaBarangKeyReleased
         // TODO add your handling code here:
         
-    if (!hargaAsli.getText().isEmpty() && 
-    !ComboDiskon.getSelectedItem().equals("Pilih Diskon")) {
-    prosesHitung();
-}
-
-    }//GEN-LAST:event_hargaAsliKeyReleased
+    }//GEN-LAST:event_namaBarangKeyReleased
 
     private void ComboDiskonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboDiskonItemStateChanged
         // TODO add your handling code here:
         String cek = (String) ComboDiskon.getSelectedItem();
 //       totalHarga.setText(cek.replace("%","")+"");
        SlideDiskon.setValue(Integer.parseInt(cek.replace("%","")));
-      if (!hargaAsli.getText().isEmpty()) {
+      if (!hargaAsli.getText().isEmpty() && !hargaAsli.getText().isEmpty()) {
             BtnHitung.setEnabled(true);
             BtnHapus.setEnabled(true);
             prosesHitung();
@@ -449,6 +547,8 @@ public class HitungDiskon extends javax.swing.JFrame {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         // TODO add your handling code here:
+        namaBarang.setText("");        
+        namaBarang.requestFocus();
         hargaAsli.setText("");
         SlideDiskon.setValue(0);
         resDiskon1.setText("");
@@ -456,6 +556,23 @@ public class HitungDiskon extends javax.swing.JFrame {
         diskonT.setText("");
         totalHarga.setText("");
     }//GEN-LAST:event_BtnHapusActionPerformed
+
+    private void hargaAsliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaAsliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hargaAsliActionPerformed
+
+    private void hargaAsliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaAsliKeyReleased
+        // TODO add your handling code here:
+        filterKeyTyped(evt);
+    if (!hargaAsli.getText().isEmpty() && !hargaAsli.getText().isEmpty()  && 
+    !ComboDiskon.getSelectedItem().equals("Pilih Diskon")) {
+    prosesHitung();
+}
+    }//GEN-LAST:event_hargaAsliKeyReleased
+
+    private void hargaAsliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaAsliKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hargaAsliKeyTyped
 
     /**
      * @param args the command line arguments
@@ -500,10 +617,10 @@ public class HitungDiskon extends javax.swing.JFrame {
     private javax.swing.JTextField diskonT;
     private javax.swing.JTextField hargaAsli;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -511,8 +628,11 @@ public class HitungDiskon extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField kodeDiskon;
+    private javax.swing.JTextField namaBarang;
     private javax.swing.JTextField resDiskon1;
     private javax.swing.JTextField totalHarga;
     // End of variables declaration//GEN-END:variables
